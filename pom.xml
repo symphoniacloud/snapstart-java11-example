@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>my.groupId</groupId>
-  <artifactId>chapter5-API</artifactId>
+  <artifactId>snapstart-java11-example</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>

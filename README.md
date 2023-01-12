@@ -1,3 +1,3 @@
-# Chapter 5
+# SnapStart Example for Java 11
 
-Example code for Chapter 5, section 2
+See https://blog.symphonia.io

@@ -8,6 +8,8 @@ Globals:
     MemorySize: 1769
     AutoPublishAlias: live
     Timeout: 25
+    SnapStart:
+      ApplyOn: PublishedVersions
     Environment:
       Variables:
         LOCATIONS_TABLE: !Ref LocationsTable

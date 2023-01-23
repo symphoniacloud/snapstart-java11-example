@@ -5,17 +5,36 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.crac.Context;
+import org.crac.Core;
+import org.crac.Resource;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WeatherQueryLambda {
+public class WeatherQueryLambda implements Resource {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.defaultClient();
     private final String tableName = System.getenv("LOCATIONS_TABLE");
 
     private static final String DEFAULT_LIMIT = "50";
+
+    public WeatherQueryLambda() {
+        Core.getGlobalContext().register(this);
+    }
+
+    @Override
+    public void beforeCheckpoint(Context<? extends Resource> context) throws Exception {
+        System.out.println("In beforeCheckpoint");
+        new ArrayList<>(dynamoDB.scan(new ScanRequest().withTableName(tableName).withLimit(1)).getItems());
+    }
+
+    @Override
+    public void afterRestore(Context<? extends Resource> context) throws Exception {
+        System.out.println("In afterRestore");
+    }
 
     public ApiGatewayResponse handler(ApiGatewayRequest request) throws IOException {
         System.out.println("** 1 **");

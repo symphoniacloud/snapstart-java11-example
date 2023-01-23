@@ -4,8 +4,9 @@ Description: snapstart-java11-example
 
 Globals:
   Function:
-    Runtime: java8
+    Runtime: java11
     MemorySize: 1769
+    AutoPublishAlias: live
     Timeout: 25
     Environment:
       Variables:
